@@ -1,19 +1,8 @@
-import { MongoClient, type Db, type Collection } from "mongodb";
-import { z } from "zod";
-import { createEnv } from "@t3-oss/env-core";
+import { MongoClient, type Db, type Collection } from "mongodb"
+import { z } from "zod"
 
-import { logger } from "./logger";
-
-const env = createEnv({
-    server: {
-        DB_USER: z.string(),
-        DB_PASS: z.string(),
-        DB_HOST: z.string(),
-        DB_QUERY: z.string(),
-        DATABASE_NAME: z.string(),
-    },
-    runtimeEnv: process.env,
-});
+import { env } from "./env"
+import { logger } from "./logger"
 
 const DATABASE_URL = `mongodb+srv://${env.DB_USER}:${env.DB_PASS}@${env.DB_HOST}/?${env.DB_QUERY}`;
 

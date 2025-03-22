@@ -1,10 +1,12 @@
-import express from "express";
-import pinoHttp from "pino-http";
-import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
+import express from "express"
+import pinoHttp from "pino-http"
+import swaggerUi from "swagger-ui-express"
+import swaggerJSDoc from "swagger-jsdoc"
 
-import { logger } from "./logger";
-import { initDB, getProfessors } from "./db";
+import { env } from "./env"
+import { logger } from "./logger"
+import { initDB, getProfessors } from "./db"
+
 
 const server = express();
 server.use(pinoHttp({ logger }));
@@ -87,7 +89,7 @@ server.get("/api/professors", async (req, res) => {
 });
 
 initDB().then(() => {
-    server.listen(3000, () => {
-        logger.info("Server running on http://localhost:3000");
+    server.listen(env.PORT, () => {
+        logger.info(`Server running on http://localhost:${env.PORT}`);
     });
 });
